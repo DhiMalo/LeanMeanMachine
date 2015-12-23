@@ -1,22 +1,28 @@
-//create an app called MEANNews
+// Create an app called MEANNews
+
 var app = angular.module('MEANNews', []);
 
+// Create a factory. Factory names are by convention written in lowerCamelCase.
+
+app.factory('posts', [function(){
+
+  //Create an object that can hold our array of posts.
+  
+  var obj = {
+    posts: []
+  }
+  return obj;
+
+}]);
+
 //create a  controller called MainCtrl
-app.controller('MainCtrl', ['$scope', function($scope){
+app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
   //create a variable called test.  
     // When I make a variable under $scope, I make it useable
     // by all other controllers and also viewable at index.html.
   $scope.test = 'Hello Person'; 
-  $scope.posts = [
-    {title: 'AmazingPost1', link:'Best news ever!', upvotes: 0},
-    {title: 'AmazingPost2', link:'Best news ever2!', upvotes: 0},
-    {title: 'AmazingPost3', link:'Best news ever3!', upvotes: 0},
-    {title: 'AmazingPost4', link:'Best news ever4!', upvotes: 0},
-    {title: 'AmazingPost5', link:'Best news ever5!', upvotes: 0},
-    {title: 'AmazingPost6', link:'Best news ever6!', upvotes: 0},
-    {title: 'AmazingPost7', link:'Best news ever7!', upvotes: 0},
-    {title: 'AmazingPost8', link:'Best news ever8!', upvotes: 10}
-    ];
+
+  $scope.posts = posts.posts; //this now refers to the object returned by the posts factory.
 
   $scope.addPost = function(){
     //add a new post to the post array on he scope.
