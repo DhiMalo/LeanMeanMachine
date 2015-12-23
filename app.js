@@ -29,4 +29,8 @@ app.controller('MainCtrl', ['$scope', function($scope){
     }
   }
 
+  $scope.incrementUpvotes = function(post){
+    post.upvotes++;
+  }
+
 }]);
