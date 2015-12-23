@@ -6,26 +6,26 @@ app.controller('MainCtrl', ['$scope', function($scope){
   //create a variable called test.  
     // When I make a variable under $scope, I make it useable
     // by all other controllers and also viewable at index.html.
-  $scope.test = 'Hello Man'; 
+  $scope.test = 'Hello Person'; 
   $scope.posts = [
-    {title: 'AmazingPost1', content:'Best news ever!', upvotes: 0},
-    {title: 'AmazingPost2', content:'Best news ever2!', upvotes: 0},
-    {title: 'AmazingPost3', content:'Best news ever3!', upvotes: 0},
-    {title: 'AmazingPost4', content:'Best news ever4!', upvotes: 0},
-    {title: 'AmazingPost5', content:'Best news ever5!', upvotes: 0},
-    {title: 'AmazingPost6', content:'Best news ever6!', upvotes: 0},
-    {title: 'AmazingPost7', content:'Best news ever7!', upvotes: 0},
-    {title: 'AmazingPost8', content:'Best news ever8!', upvotes: 10}
+    {title: 'AmazingPost1', link:'Best news ever!', upvotes: 0},
+    {title: 'AmazingPost2', link:'Best news ever2!', upvotes: 0},
+    {title: 'AmazingPost3', link:'Best news ever3!', upvotes: 0},
+    {title: 'AmazingPost4', link:'Best news ever4!', upvotes: 0},
+    {title: 'AmazingPost5', link:'Best news ever5!', upvotes: 0},
+    {title: 'AmazingPost6', link:'Best news ever6!', upvotes: 0},
+    {title: 'AmazingPost7', link:'Best news ever7!', upvotes: 0},
+    {title: 'AmazingPost8', link:'Best news ever8!', upvotes: 10}
     ];
 
   $scope.addPost = function(){
     //add a new post to the post array on he scope.
     $scope.upvotes = 0;
     
-    if ($scope.title !== '' && $scope.content !== '' ) { 
-    $scope.posts.push({title: $scope.title, content: $scope.content, upvotes: $scope.upvotes });
+    if ($scope.title !== '') { 
+    $scope.posts.push({title: $scope.title, link: $scope.link, upvotes: $scope.upvotes });
     $scope.title = '';
-    $scope.content = '';
+    $scope.link = '';
     }
   }
 
