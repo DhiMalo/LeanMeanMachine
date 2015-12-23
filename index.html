@@ -9,13 +9,17 @@
 
   </head>
   <!-- Load the app module and the main controller. -->
-  <body ng-app="MEANNews" ng-controller="MainCtrl">
+  <body ng-app = "MEANNews" ng-controller = "MainCtrl">
       {{test}}
     <div ng-repeat="post in posts | orderBy: 'upvotes' | uppercase">
       <!-- Call on the variable named test!  -->
-      {{post.title}} : {{post.content}} - Upvotes: {{post.upvotes}}
+      <b>{{post.title}}</b> --> {{post.content}} - Upvotes: {{post.upvotes}}
     </div>
-    <button ng-click="addPost()">Post</button>
+    <form ng-submit = "addPost()">
+      <input type = "text" ng-model = "title">Title</input>
+      <input type = "text" ng-model = "content">Content</input>
+      <button type="submit">Post</button>
+    </form>
   </body>
 </html>
 

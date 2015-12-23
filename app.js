@@ -20,7 +20,13 @@ app.controller('MainCtrl', ['$scope', function($scope){
 
   $scope.addPost = function(){
     //add a new post to the post array on he scope.
-    $scope.posts.push({title: 'AmazingNewPost!', content: 'Dunno but I\'ll fill this later', upvotes: 5});
+    $scope.upvotes = 0;
+    
+    if ($scope.title !== '' && $scope.content !== '' ) { 
+    $scope.posts.push({title: $scope.title, content: $scope.content, upvotes: $scope.upvotes });
+    $scope.title = '';
+    $scope.content = '';
+    }
   }
 
 }]);
