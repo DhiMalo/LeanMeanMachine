@@ -1,8 +1,25 @@
 // Create an app called MEANNews
 
-var app = angular.module('MEANNews', []);
+var app = angular.module('MEANNews', [
+  'ui.router'
+
+  ]);
 
 // Create a factory. Factory names are by convention written in lowerCamelCase.
+
+// UI Router provides a number of new things: $stateProvider and $urlRouterProvider
+
+app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider){
+
+  $stateProvider.state('home', {
+    //define which URL will be defined as HOME
+    url: "/home",
+    template: "/home.html",
+    controller: "MainCtrl"
+  })
+
+}]);
+
 
 app.factory('posts', [function(){
 
@@ -16,8 +33,9 @@ app.factory('posts', [function(){
 }]);
 
 //create a  controller called MainCtrl
-app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
-  //create a variable called test.  
+// Inject the posts factory into both the array and the function's params.
+
+app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts) { 
     // When I make a variable under $scope, I make it useable
     // by all other controllers and also viewable at index.html.
   $scope.test = 'Hello Person'; 
@@ -29,7 +47,7 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
     $scope.upvotes = 0;
     
     if ($scope.title !== '') { 
-    $scope.posts.push({title: $scope.title, link: $scope.link, upvotes: $scope.upvotes });
+    $scope.posts.push({ title: $scope.title, link: $scope.link, upvotes: $scope.upvotes });
     $scope.title = '';
     $scope.link = '';
     }
