@@ -46,7 +46,6 @@ app.factory('posts', [function(){
 app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts) { 
     // When I make a variable under $scope, I make it useable
     // by all other controllers and also viewable at index.html.
-  $scope.test = 'Hello Person'; 
 
   $scope.posts = posts.posts; //this now refers to the object returned by the posts factory.
 
@@ -61,8 +60,8 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts) {
       upvotes: $scope.upvotes,
       // create an array of objects for each comment 
       comments : [
-        {author: 'Joe', body: 'Cool, man!', upvotes: 0}, //comments can be upvoted just like posts!
-        {author: 'Mikey', body: 'I like everything!', upvotes: 0}, 
+        // comments can be upvoted just like posts!
+        // example: {author: 'Mikey', body: 'I like everything!', upvotes: 0}
       ]
     });
     $scope.title = '';
@@ -79,8 +78,22 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts) {
 // Create A PostController so we can add comments for each post. 
 //To do this, pass in the posts factory, and also pass in the stateParams from the ui-router
   // stateParams refers to the {variable} strings being identified by the url, see the string "id",line 20.
-app.controller('PostCtrl', ['$scope', '$stateParams', 'posts', function($scope, $stateParams, posts){ 
+app.controller('PostsCtrl', ['$scope', '$stateParams', 'posts', function($scope, $stateParams, posts){ 
   // Create a new variable to refer to an individual post. 
     // The index of the posts factory array will be equal to whatever id is used.
-  $scope.post =  posts.posts[stateParams.id]; 
+  $scope.post =  posts.posts[$stateParams.id]; 
+  // USAGE: When we use ng-repeat, we get acess to the $index variable to access the indices of our collection.
+    //We'll be using that to create a new route for each new post/its associated comments
+  $scope.addComment = function(){
+    if($scope.body === '') { return; }
+    $scope.post.comments.push({
+      body: $scope.body,
+      author: 'user',
+      upvotes: 0
+    });
+    $scope.body = '';
+  };
+
 }]);
+
+

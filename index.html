@@ -23,6 +23,8 @@
   </div>
 
 <!-- Make sure to place the following script right before the body tag, before inserting the desired template-route. Always put the other end of the SCRIPT tag at the end of the route!-->
+
+<!-- This is an inline template-route for HOME -->
 <script type="text/ng-template" id="/home.html">
 
   <div class="page-header">
@@ -30,9 +32,9 @@
   </div>
 
   <div ng-repeat="post in posts | orderBy:'-upvotes'">
-    <span class="glyphicon glyphicon-thumbs-up"
-      ng-click="incrementUpvotes(post)"></span>
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
     {{post.upvotes}}
+
     <span style="font-size:20px; margin-left:10px;">
       <!-- When the ng=show expression resolves to TRUE, then the associated tag will show. -->
       <!-- The href is the destination link, while the value before the final </a> is what will display to be clicked, and link to it. -->
@@ -43,6 +45,11 @@
         {{post.title}}
       </span>
     </span>
+
+    <!--Now add a link to all the rich comments we are connecte to through the posts template and posts controller.: -->
+    <span>
+  <a href="#/posts/{{$index}}">Comments</a>
+</span>
   </div>
 
   <form ng-submit="addPost()"
@@ -64,8 +71,44 @@
     <button type="submit" class="btn btn-primary">Post</button>
   </form>
 </script>
-<script type="text/ng-template" id="post.html">
 
+<script type="text/ng-template" id="/posts.html">
+  <div class="page-header">
+    <h3>
+      <a ng-show="post.link" href="{{post.link}}">
+        {{post.title}}
+      </a>
+      <span ng-hide="post.link">
+        {{post.title}}
+      </span>
+    </h3>
+  </div>
+
+  <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up"
+      ng-click="incrementUpvotes(comment)"></span>
+    {{comment.upvotes}} - by {{comment.author}}
+    <span style="font-size:20px; margin-left:10px;">
+      {{comment.body}}
+    </span>
+  </div>
+
+  <!-- post template -->
+
+  <form ng-submit="addComment()"
+    style="margin-top:30px;">
+    <h3>Add a new comment</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Comment"
+      ng-model="body"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+  
 </script>
+
 </body>
 </html>
